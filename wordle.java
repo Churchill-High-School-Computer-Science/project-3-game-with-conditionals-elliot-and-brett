@@ -2,36 +2,84 @@ import java.lang.Math;
 import java.util.Scanner;
 public class wordle{
     String[] word = { "Types" , "Ghent", "Brett", "Lunch"};
-    String wordl = word[(int) (Math.floor(Math.random()* 5))];
+    private String wordl = word[(int) (Math.floor(Math.random()* 5))];
     private String Guess;
-
-    public String guess(String guess) {
-        Guess = guess;
+    private String letter;
+    
+    public void guess(String guess1) {
+        Guess = guess1;
     }
 
     public String correct(){
         
-        if (Guess.substring(0,1).equals(word.substring(0,1))){
-            return "Your first letter is in the correct place";
+        if (wordl.indexOf(Guess.substring(0,1)) >= 0 ){
+            if (Guess.substring(0,1).equals(wordl.substring(0,1))){
+                letter += "✓";
+            }
+            else{
+                letter += "-";
+            }
         }
-        else if (Guess.substring(1,2).equals(word.substring(1,2))){
-            return "Your second letter is in the correct place";
+        else{
+            letter += "X";
         }
-        else if (Guess.substring(2,3).equals(word.substring(2,3))){
-            return "Your third letter is in the correct place";
+
+        if (wordl.indexOf(Guess.substring(1,2)) >= 0 ){
+            if (Guess.substring(1,2).equals(wordl.substring(1,2))){
+                letter += "✓";
+            }
+            else{
+                letter += "-";
+            }
         }
-        else if (Guess.substring(3,4).equals(word.substring(3,4))){
-            return "Your fourth letter is in the correct place";
+        else{
+            letter += "X";
         }
-        else if (Guess.substring(4,5).equals(word.substring(4,5))){
-            return "Your fifth letter is in the correct place";
+
+        if (wordl.indexOf(Guess.substring(2,3)) >= 0 ){
+            if (Guess.substring(2,3).equals(wordl.substring(2,3))){
+                letter += "✓";
+            }
+            else{
+                letter += "-";
+            }
         }
-        else;
-            return "You had nothing correct.";
+        else{
+            letter += "X";
         }
+
+        if (wordl.indexOf(Guess.substring(3,4)) >= 0 ){
+            if (Guess.substring(3,4).equals(wordl.substring(3,4))){
+                letter += "✓";
+            }
+            else{
+                letter += "-";
+            }
+        }
+        else{
+            letter += "X";
+        }
+
+        if (wordl.indexOf(Guess.substring(4,5)) >= 0 ){
+            if (Guess.substring(4,5).equals(wordl.substring(4,5))){
+                letter += "✓";
+            }
+            else{
+                letter += "-";
+            }
+        }
+        else{
+            letter += "X";
+        }
+        if (letter.equals("✓✓✓✓✓")){
+            return "You got the word right";
+        }            
+        else{
+            return letter;
+        }
+            
     }
-    public String close(){
-        
-    }
-    
 }
+    public void reset_letter(){
+        String letter = "";
+    }
