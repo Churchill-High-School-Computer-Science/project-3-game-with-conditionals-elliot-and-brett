@@ -4,6 +4,7 @@ public class Blackjack{
     private int value;
     private int total;
     private int dealer;
+    private int cardHidden;
     private boolean stand;
     private boolean bust;
     private boolean win;
@@ -43,7 +44,7 @@ public class Blackjack{
             total += value;
         }
         int card3 = (int) (Math.random() * 13) + 1;
-        int card4 = (int) (Math.random() * 13) + 1;
+        cardHidden = (int) (Math.random() * 13) + 1;
         if (card3 < 9){
             dealer += card3;
             System.out.println("The dealer has a " + card3 + " showing.");
@@ -53,18 +54,18 @@ public class Blackjack{
             System.out.println("The dealer has a face card showing.");
         }
         else{
-            total += 11;
+            dealer += 11;
             System.out.println("The dealer has an ace showing.");
         }
-        if (card4 < 9){
-            dealer += card4;
+        if (cardHidden < 9){
+            dealer += cardHidden;
             dealer += 1;
         }
-        else if (card4 >= 10 && card4 <= 12){
+        else if (cardHidden >= 10 && cardHidden <= 12){
             dealer += 10;
         }
         else{
-            total += 11;
+            dealer += 11;
         }
         if (total == 21){
             win = true;
@@ -79,11 +80,11 @@ public class Blackjack{
     {
         while (stand != true && bust != true && win != true){
             System.out.println("Hit or Stand?");
-            String standing = input.next();
+        //    input.nextLine(); 
+            String standing = input.nextLine();
+            System.out.println(standing + "*******");
             if (standing.equals("Stand")){
                 stand = true;
-            }
-            if (stand == true){
                 return "your final total is " + total;
             }
             else{
@@ -93,7 +94,7 @@ public class Blackjack{
                         value = 2;
                         total += value;
                         if (total <= 21){
-                        return "You drew a two!";
+                        System.out.println("You drew a two!");
                         }
                         else{
                             bust = true;
@@ -104,7 +105,7 @@ public class Blackjack{
                         value = 3;
                         total += value;
                         if (total <= 21){
-                        return "You drew a three!";
+                        System.out.println("You drew a three!");
                         }
                         else{
                             bust = true;
@@ -115,7 +116,7 @@ public class Blackjack{
                         value = 4;
                         total += value;
                         if (total <= 21){
-                        return "You drew a four!";
+                        System.out.println("You drew a four!");
                         }
                         else{
                             bust = true;
@@ -126,7 +127,7 @@ public class Blackjack{
                         value = 5;
                         total += value;
                         if (total <= 21){
-                        return "You drew a five!";
+                        System.out.println("You drew a five!");
                         }
                         else{
                             bust = true;
@@ -137,7 +138,7 @@ public class Blackjack{
                         value = 6;
                         total += value;
                         if (total <= 21){
-                        return "You drew a six!";
+                        System.out.println("You drew a six!");
                         }
                         else{
                             bust = true;
@@ -148,7 +149,7 @@ public class Blackjack{
                         value = 7;
                         total += value;
                         if (total <= 21){
-                        return "You drew a seven!";
+                        System.out.println("You drew a seven!");
                         }
                         else{
                             bust = true;
@@ -159,7 +160,7 @@ public class Blackjack{
                         value = 8;
                         total += value;
                         if (total <= 21){
-                        return "You drew an eight!";
+                        System.out.println("You drew an eight!");
                         }
                         else{
                             bust = true;
@@ -170,7 +171,7 @@ public class Blackjack{
                         value = 9;
                         total += value;
                         if (total <= 21){
-                        return "You drew a nine!";
+                        System.out.println("You drew a nine!");
                         }
                         else{
                             bust = true;
@@ -183,7 +184,7 @@ public class Blackjack{
                         value = 10;
                         total += value;
                         if (total <= 21){
-                        return "You drew a ten!";
+                        System.out.println("You drew a ten!");
                         }
                         else{
                             bust = true;
@@ -194,7 +195,7 @@ public class Blackjack{
                         value = 10;
                         total += value;
                         if (total <= 21){
-                        return "You drew a face card!";
+                        System.out.println("You drew a face card!");
                         }
                         else{
                             bust = true;
@@ -207,11 +208,11 @@ public class Blackjack{
                     int value = input.nextInt();
                     total += value;
                     if (total <= 21){
-                        return "Lucky ace!";
+                        System.out.println("Lucky ace!");
                         }
-                        else{
-                            bust = true;
-                            return "Unlucky ace, you busted!";
+                    else{
+                        bust = true;
+                        return "Unlucky ace, you busted!";
                 }
             }
             }
@@ -219,6 +220,88 @@ public class Blackjack{
             return "You can't draw anymore, the game is already over";
         }
         public String end(){
-
-        }
+            if (win == true){
+                return "Congrats on the win, the dealer's cards don't matter because you have blackjack";
+            }
+            else if(bust = true){
+                return "Sorry you busted so you already lost.";
+            }
+            else{
+                if (cardHidden < 9){
+                    dealer += cardHidden;
+                    System.out.println("The dealer reveals a " + cardHidden + ".");
+                }
+                else if (cardHidden >= 10 && cardHidden <= 12){
+                    dealer += 10;
+                    System.out.println("The dealer reveals a face card.");
+                }
+                else{
+                    total += 11;
+                    System.out.println("The dealer reveals an ace.");
+                    }
+                System.out.println("That brings the dealers starting total to " + dealer + ".");
+                while (dealer < 17){
+                    int card = (int) (Math.random() * 13) + 1;
+                    if (card == 1){
+                        dealer += 2;
+                        System.out.println("The dealer drew a two!");
+                        }
+                    else if (card == 2){
+                        dealer += 3;
+                        System.out.println("The dealer drew a three!");
+                    }
+                    else if (card == 3){
+                        dealer += 4;
+                        System.out.println("The dealer drew a four!");
+                    }
+                    else if (card == 4){
+                        dealer += 5;
+                        System.out.println("The dealer drew a five!");
+                    }
+                    else if (card == 5){
+                        dealer += 6;
+                        System.out.println("The dealer drew a six!");
+                    }
+                    else if (card == 6){
+                        dealer += 7;
+                        System.out.println("The dealer drew a seven!");
+                    }
+                    else if (card == 7){
+                        dealer += 8;
+                        System.out.println("The dealer drew an eight!");
+                    }
+                    else if (card == 8){
+                        dealer += 9;
+                        System.out.println("The dealer drew a nine!");
+                    }
+                    else if (card == 9){
+                        dealer += 10;
+                        System.out.println("The dealer drew a ten!");
+                    }
+                    else if (card >= 10 && card <= 12){
+                        dealer += 10;
+                        System.out.println("The dealer drew a face card!");
+                    }
+                    else { 
+                        dealer += 11;
+                        if (dealer > 21){
+                            dealer -= 10;
+                            System.out.println("The dealer drew an ace, it is valued at 1");
+                        }
+                        else{
+                            System.out.println("The dealer draw an ace, it is valued at 11");
+                        }
+                    }
+                }
+                if (dealer > 21){
+                    return "The dealer busted so you win!";
+                }
+                else if (dealer < total){
+                    return "You beat the dealer, congrats!";
+                }
+                else{
+                    return "The dealer beat you, sorry.";
+                }
+                    }
+                }
 }
