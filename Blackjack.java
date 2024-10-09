@@ -9,7 +9,6 @@ public class Blackjack{
     private boolean bust;
     private boolean win;
     Scanner input = new Scanner(System.in);
-    // finish bust
     public Blackjack(){
         stand = false;
         bust = false;
@@ -30,6 +29,7 @@ public class Blackjack{
             System.out.println("You drew an ace! Do you want it to be a 1 or 11?");
             int value = input.nextInt();
             total += value;
+            input.nextLine();
         }
          if (card2 < 9){
             total += card2;
@@ -42,12 +42,14 @@ public class Blackjack{
             System.out.println("You drew an ace! Do you want it to be a 1 or 11?");
             int value = input.nextInt();
             total += value;
+            input.nextLine();
         }
         int card3 = (int) (Math.random() * 13) + 1;
         cardHidden = (int) (Math.random() * 13) + 1;
         if (card3 < 9){
             dealer += card3;
-            System.out.println("The dealer has a " + card3 + " showing.");
+            dealer ++;
+            System.out.println("The dealer has a " + (card3 + 1) + " showing.");
         }
         else if (card3 >= 10 && card3 <= 12){
             dealer += 10;
@@ -80,9 +82,7 @@ public class Blackjack{
     {
         while (stand != true && bust != true && win != true){
             System.out.println("Hit or Stand?");
-        //    input.nextLine(); 
             String standing = input.nextLine();
-            System.out.println(standing + "*******");
             if (standing.equals("Stand")){
                 stand = true;
                 return "your final total is " + total;
@@ -207,6 +207,7 @@ public class Blackjack{
                     System.out.println("You drew an ace! Do you want it to be a 1 or 11?");
                     int value = input.nextInt();
                     total += value;
+                    input.nextLine();
                     if (total <= 21){
                         System.out.println("Lucky ace!");
                         }
@@ -223,20 +224,17 @@ public class Blackjack{
             if (win == true){
                 return "Congrats on the win, the dealer's cards don't matter because you have blackjack";
             }
-            else if(bust = true){
+            else if(bust == true){
                 return "Sorry you busted so you already lost.";
             }
             else{
                 if (cardHidden < 9){
-                    dealer += cardHidden;
-                    System.out.println("The dealer reveals a " + cardHidden + ".");
+                    System.out.println("The dealer reveals a " + (cardHidden + 1) + ".");
                 }
                 else if (cardHidden >= 10 && cardHidden <= 12){
-                    dealer += 10;
                     System.out.println("The dealer reveals a face card.");
                 }
                 else{
-                    total += 11;
                     System.out.println("The dealer reveals an ace.");
                     }
                 System.out.println("That brings the dealers starting total to " + dealer + ".");
@@ -299,8 +297,11 @@ public class Blackjack{
                 else if (dealer < total){
                     return "You beat the dealer, congrats!";
                 }
-                else{
+                else if (dealer > total){
                     return "The dealer beat you, sorry.";
+                }
+                else{
+                    return "It's a draw.";
                 }
                     }
                 }

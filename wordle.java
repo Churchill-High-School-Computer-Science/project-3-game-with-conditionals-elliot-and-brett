@@ -5,7 +5,6 @@ public class wordle{
     private String wordl = word[(int) (Math.floor(Math.random()* 4))];
     private String Guess;
     private String letter = "";
-    private boolean Win;
     
     public void guess(String guess1) {
         Guess = guess1;
@@ -72,8 +71,7 @@ public class wordle{
         else{
             letter += "X";
         }
-        if (letter.equals("YYYYY")){
-            Win = true;
+        if (letter.equals("YYYYY")){    
             return "You got the word right";        
         }            
         else{
@@ -83,6 +81,17 @@ public class wordle{
     }
 
     public void reset_letter(){
-        String letter = " ";
+        letter = "";
+    }
+    public boolean check_win(){
+        if (wordl.equals(Guess)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public String ending(){
+        return "The word was " + wordl;
     }
 }
